@@ -15,7 +15,7 @@ If `devtools` is not installed, uncomment the code below and install it from CRA
 Install development version from GitHub:
 
 ``` r
-devtools::install_github("parse-health/SRAT")
+devtools::install_github("celehs/SRAT")
 ```
 
 Load package `SRAT` into R:
