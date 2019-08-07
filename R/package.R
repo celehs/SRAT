@@ -13,3 +13,9 @@
 #' @useDynLib SRAT
 #' @import np Rcpp RcppArmadillo
 NULL
+
+#' BS tree algorithm
+#' 
+#' @param y a numeric vector
+#' @export
+bs.tree <- function(y) bs_tree(y)

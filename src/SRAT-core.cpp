@@ -7,10 +7,6 @@
 using namespace Rcpp;
 using namespace arma;
 
-//' BS tree algorithm
-//' 
-//' @param y a numeric vector
-//' @export
 // [[Rcpp::export]]
 arma::mat bs_tree(const arma::vec & y) {
   vec uniy = unique(y); // return unique values sorted in ascending order
