@@ -32,5 +32,6 @@ obj.min <- function(coef, Z, y, u = NULL, v = NULL, tree = TRUE,
   n <- length(y)
   if (is.null(u)) u <- rep(1, n)
   if (is.null(v)) v <- rep(1, n)
-  obj_min(coef, Z, y, u, v, tree, nrep, ftol, nfun_max)
+  M <- obj_min(coef, Z, y, u, v, tree, nrep, ftol, nfun_max)
+  list(min = M[1, 1], param = M[1, -1])
 }
