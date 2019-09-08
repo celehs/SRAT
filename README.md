@@ -20,4 +20,4 @@ devtools::install_github("celehs/SRAT")
 
 ## References
 
-W Dai, M Yang, C Wang, T Cai, T. Sequence robust association test for familial data. _Biometrics_, 2017, 73(3):876–884. <https://doi.org/10.1111/biom.12643>
+W Dai, M Yang, C Wang, T Cai. Sequence robust association test for familial data. _Biometrics_, 2017, 73(3):876–884. <https://doi.org/10.1111/biom.12643>
