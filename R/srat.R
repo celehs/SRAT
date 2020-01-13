@@ -69,41 +69,34 @@ srat <- function(Y, Z, X, cluster = NULL, init = NULL, w_sqrt = NULL,
 #' @param X covariates for adjustment (e.g., age, gender)
 #' @param cluster family identifier
 #' @param init initial parameters
-#' @param n_ptb number of perturbations
+#' @param n.ptb number of perturbations
 #' 
 #' @export
-srat.null <- function(Y, X, cluster = NULL, init = NULL, n_ptb = 1000) {
-  N <- NROW(Z)
-  p <- NCOL(Z)
-  D <- rep(1, N)
-  stopifnot(length(Y) == N)
+srat.null <- function(Y, X, cluster = NULL, init = NULL, n.ptb = 1000) {
+  N <- length(Y)
+  X <- as.matrix(X)
   if (is.null(cluster)) cluster <- 1:N
   ID <- as.integer(factor(cluster))
   n <- length(unique(ID))
   V <- rep(1, N)
-  X <- as.matrix(X)
-  e0 <- sum_I(Y, V * D / n) - D * sum_I(-Y, V / n)
+  e0 <- sum_I(Y, V / n) - sum_I(-Y, V / n)
   if (is.null(init)) init <- stats::lm(e0 ~ X)$coef[-1] # no intercept
-  init <- init/sum(abs(init))
-  if (is.null(D)) {
-    M <- obj_min(init, X, Y, V, V, TRUE, 1, 1e-6, 5000)
-  } else {
-    M <- obj_min(init, -X, -Y, D * V, V, TRUE, 1, 1e-6, 5000)
-  }
+  init <- init / sum(abs(init))
+  M <- obj_min(init, X, Y, V, V, TRUE, 1, 1e-6, 5000)
   alpha <- M[1, -1]
   eta <- c(X %*% alpha)
-  alpha_ptb <- matrix(NA, length(alpha), n_ptb)
-  eta_ptb <- matrix(NA, N, n_ptb)
-  V_ptb <- matrix(NA, N, n_ptb)
-  for (i in 1:n_ptb) {
-    V_ptb0 <- stats::rexp(n)
-    V_ptb[, i] <- V_ptb0[ID]
-    M_ptb <- obj_min(alpha, X, Y, V_ptb[, i], V_ptb[, i], TRUE, 1, 1e-6, 5000)
-    alpha_ptb[, i] <- M_ptb[1, -1]
-    eta_ptb[, i] <- c(X %*% alpha_ptb[i, ])
+  alpha.ptb <- matrix(NA, length(alpha), n.ptb)
+  eta.ptb <- matrix(NA, N, n.ptb)
+  V.ptb <- matrix(NA, N, n.ptb)
+  for (i in 1:n.ptb) {
+    V.ptb0 <- stats::rexp(n)
+    V.ptb[, i] <- V.ptb0[ID]
+    M.ptb <- obj_min(alpha, X, Y, V.ptb[, i], V.ptb[, i], TRUE, 1, 1e-6, 5000)
+    alpha.ptb[, i] <- M.ptb[1, -1]
+    eta.ptb[, i] <- c(X %*% alpha.ptb[i, ])
   }
   list(n = n, Y = Y, X = X, alpha = alpha, eta = eta, 
-       alpha_ptb = alpha_ptb, eta_ptb = eta_ptb, V_ptb = V_ptb)  
+       alpha.ptb = alpha.ptb, eta.ptb = eta.ptb, V.ptb = V.ptb)  
 }
 
 #' Objective function minimization
