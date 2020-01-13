@@ -72,7 +72,7 @@ srat <- function(Y, Z, X, cluster = NULL, init = NULL, w_sqrt = NULL,
 #' @param n_ptb number of perturbations
 #' 
 #' @export
-skat.null <- function(Y, X, cluster = NULL, init = NULL, n_ptb = 1000) {
+srat.null <- function(Y, X, cluster = NULL, init = NULL, n_ptb = 1000) {
   N <- NROW(Z)
   p <- NCOL(Z)
   D <- rep(1, N)
