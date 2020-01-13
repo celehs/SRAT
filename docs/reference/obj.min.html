@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kuonen's method to calculate p-value — kuonen • SRAT</title>
+<title>Objective function minimization — obj.min • SRAT</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Kuonen's method to calculate p-value — kuonen" />
-<meta property="og:description" content="Kuonen's method to calculate p-value" />
+<meta property="og:title" content="Objective function minimization — obj.min" />
+<meta property="og:description" content="Objective function minimization" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,35 +105,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kuonen's method to calculate p-value</h1>
-    <small class="dont-index">Source: <a href='https://github.com/celehs/SRAT/blob/master/R/kuonen.R'><code>R/kuonen.R</code></a></small>
-    <div class="hidden name"><code>kuonen.Rd</code></div>
+    <h1>Objective function minimization</h1>
+    <small class="dont-index">Source: <a href='https://github.com/celehs/SRAT/blob/master/R/srat.R'><code>R/srat.R</code></a></small>
+    <div class="hidden name"><code>obj.min.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Kuonen's method to calculate p-value</p>
+    <p>Objective function minimization</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kuonen</span>(<span class='no'>q</span>, <span class='no'>lambda</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>maxit</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
+    <pre class="usage"><span class='fu'>obj.min</span>(<span class='no'>coef</span>, <span class='no'>Z</span>, <span class='no'>y</span>, <span class='kw'>u</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>v</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tree</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>ftol</span> <span class='kw'>=</span> <span class='fl'>1e-06</span>, <span class='kw'>nfun_max</span> <span class='kw'>=</span> <span class='fl'>5000</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>q</th>
-      <td><p>observed test statistic</p></td>
+      <th>coef</th>
+      <td><p>initial parameter values</p></td>
     </tr>
     <tr>
-      <th>lambda</th>
-      <td><p>eigen-values of the empirical covariance matrix</p></td>
+      <th>Z</th>
+      <td><p>covariates matrix</p></td>
     </tr>
     <tr>
-      <th>tol</th>
-      <td><p>tolorence level</p></td>
+      <th>y</th>
+      <td><p>response vector</p></td>
     </tr>
     <tr>
-      <th>maxit</th>
-      <td><p>maximum number of iterations</p></td>
+      <th>u</th>
+      <td><p>a vector of weights</p></td>
+    </tr>
+    <tr>
+      <th>v</th>
+      <td><p>a vector of weigths</p></td>
+    </tr>
+    <tr>
+      <th>tree</th>
+      <td><p>indicator of whether the tree algorithm should be used for fast ranking</p></td>
+    </tr>
+    <tr>
+      <th>nrep</th>
+      <td><p>number of replications in the optimization algorithm</p></td>
+    </tr>
+    <tr>
+      <th>ftol</th>
+      <td><p>function tolerance to determine convergence</p></td>
+    </tr>
+    <tr>
+      <th>nfun_max</th>
+      <td><p>maximum number of function evaluations</p></td>
     </tr>
     </table>
 

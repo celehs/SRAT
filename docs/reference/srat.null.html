@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kuonen's method to calculate p-value — kuonen • SRAT</title>
+<title>SRAT with adjustment for additional covariates (null model) — srat.null • SRAT</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Kuonen's method to calculate p-value — kuonen" />
-<meta property="og:description" content="Kuonen's method to calculate p-value" />
+<meta property="og:title" content="SRAT with adjustment for additional covariates (null model) — srat.null" />
+<meta property="og:description" content="SRAT with adjustment for additional covariates (null model)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,35 +105,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kuonen's method to calculate p-value</h1>
-    <small class="dont-index">Source: <a href='https://github.com/celehs/SRAT/blob/master/R/kuonen.R'><code>R/kuonen.R</code></a></small>
-    <div class="hidden name"><code>kuonen.Rd</code></div>
+    <h1>SRAT with adjustment for additional covariates (null model)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/celehs/SRAT/blob/master/R/srat.R'><code>R/srat.R</code></a></small>
+    <div class="hidden name"><code>srat.null.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Kuonen's method to calculate p-value</p>
+    <p>SRAT with adjustment for additional covariates (null model)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kuonen</span>(<span class='no'>q</span>, <span class='no'>lambda</span>, <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-08</span>, <span class='kw'>maxit</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
+    <pre class="usage"><span class='fu'>srat.null</span>(<span class='no'>Y</span>, <span class='no'>X</span>, <span class='kw'>cluster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n.ptb</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>q</th>
-      <td><p>observed test statistic</p></td>
+      <th>Y</th>
+      <td><p>outcome vector (e.g., phenotype)</p></td>
     </tr>
     <tr>
-      <th>lambda</th>
-      <td><p>eigen-values of the empirical covariance matrix</p></td>
+      <th>X</th>
+      <td><p>covariates for adjustment (e.g., age, gender)</p></td>
     </tr>
     <tr>
-      <th>tol</th>
-      <td><p>tolorence level</p></td>
+      <th>cluster</th>
+      <td><p>family identifier</p></td>
     </tr>
     <tr>
-      <th>maxit</th>
-      <td><p>maximum number of iterations</p></td>
+      <th>init</th>
+      <td><p>initial parameters</p></td>
+    </tr>
+    <tr>
+      <th>n.ptb</th>
+      <td><p>number of perturbations</p></td>
     </tr>
     </table>
 
