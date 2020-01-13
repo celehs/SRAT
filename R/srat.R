@@ -93,7 +93,7 @@ srat.null <- function(Y, X, cluster = NULL, init = NULL, n.ptb = 1000) {
     V.ptb[, i] <- V.ptb0[ID]
     M.ptb <- obj_min(alpha, X, Y, V.ptb[, i], V.ptb[, i], TRUE, 1, 1e-6, 5000)
     alpha.ptb[, i] <- M.ptb[1, -1]
-    eta.ptb[, i] <- c(X %*% alpha.ptb[i, ])
+    eta.ptb[, i] <- c(X %*% alpha.ptb[, i])
   }
   list(n = n, Y = Y, X = X, alpha = alpha, eta = eta, 
        alpha.ptb = alpha.ptb, eta.ptb = eta.ptb, V.ptb = V.ptb)  
