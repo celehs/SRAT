@@ -4,18 +4,14 @@
 \alias{srat.null}
 \title{SRAT with adjustment for additional covariates (null model)}
 \usage{
-srat.null(Y, X, cluster = NULL, init = NULL, n.ptb = 1000)
+srat.null(y, X, B = 1000)
 }
 \arguments{
-\item{Y}{outcome vector (e.g., phenotype)}
+\item{y}{outcome vector (e.g., phenotype)}
 
 \item{X}{covariates for adjustment (e.g., age, gender)}
 
-\item{cluster}{family identifier}
-
-\item{init}{initial parameters}
-
-\item{n.ptb}{number of perturbations}
+\item{B}{number of perturbations}
 }
 \description{
 SRAT with adjustment for additional covariates (null model)

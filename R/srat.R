@@ -65,40 +65,54 @@ srat <- function(Y, Z, X, cluster = NULL, init = NULL, w_sqrt = NULL,
 
 #' SRAT with adjustment for additional covariates (null model)
 #' 
-#' @param Y outcome vector (e.g., phenotype)
+#' @param y outcome vector (e.g., phenotype)
 #' @param X covariates for adjustment (e.g., age, gender)
-#' @param cluster family identifier
-#' @param init initial parameters
-#' @param n.ptb number of perturbations
+#' @param B number of perturbations
 #' 
 #' @export
-srat.null <- function(Y, X, cluster = NULL, init = NULL, n.ptb = 1000) {
-  N <- length(Y)
-  X <- as.matrix(X)
-  if (is.null(cluster)) cluster <- 1:N
-  ID <- as.integer(factor(cluster))
-  n <- length(unique(ID))
-  V <- rep(1, N)
-  e0 <- sum_I(Y, V / n) - sum_I(-Y, V / n)
-  if (is.null(init)) init <- stats::lm(e0 ~ X)$coef[-1] # no intercept
-  init <- init / sum(abs(init))
-  M <- obj_min(init, X, Y, V, V, TRUE, 1, 1e-6, 5000)
-  alpha <- M[1, -1]
+srat.null <- function(y, X, B = 1000) {
+  X <- as.matrix(X)  
+  n <- length(y)
+  d <- rep(1, n)  
+  v <- rep(1, n)
+  e0 <- sum_I(y, v / n) - sum_I(-y, v / n)
+  coef <- stats::lm(e0 ~ X)$coef[-1]
+  init <- coef / sum(abs(coef))
+  alpha <- obj_min(init, X, y, v, v, 
+                   TRUE, 1, 1e-6, 5000)[1, -1]
   eta <- c(X %*% alpha)
-  alpha.ptb <- matrix(NA, length(alpha), n.ptb)
-  eta.ptb <- matrix(NA, N, n.ptb)
-  V.ptb <- matrix(NA, N, n.ptb)
-  for (i in 1:n.ptb) {
-    V.ptb0 <- stats::rexp(n)
-    V.ptb[, i] <- V.ptb0[ID]
-    M.ptb <- obj_min(alpha, X, Y, V.ptb[, i], V.ptb[, i], TRUE, 1, 1e-6, 5000)
-    alpha.ptb[, i] <- M.ptb[1, -1]
-    eta.ptb[, i] <- c(X %*% alpha.ptb[, i])
+  bw <- npregbw(rank(y) ~ eta, bwmethod = "cv.aic")$bw
+  e <- c(rank_res(y, d, v, eta, bw) / n)
+  alpha.ptb <- matrix(NA, length(alpha), B)
+  v.ptb <- matrix(NA, n, B)
+  e.ptb <- matrix(NA, n, B)
+  for (b in 1:B) {
+    v.ptb[, b] <- stats::rexp(n)
+    alpha.ptb[, b] <- obj_min(alpha, X, y, v.ptb[, b], v.ptb[, b], 
+                              TRUE, 1, 1e-6, 5000)[1, -1]
+    e.ptb[, b] <- c(rank_res(y, d, v.ptb[, b], c(X %*% alpha.ptb[, b]), bw) / n)    
   }
-  list(n = n, Y = Y, X = X, alpha = alpha, eta = eta, 
-       alpha.ptb = alpha.ptb, eta.ptb = eta.ptb, V.ptb = V.ptb)  
+  list(e = e, e.ptb = e.ptb, v.ptb = v.ptb)
 }
 
+#' SRAT with adjustment for additional covariates (testing)
+#' 
+#' @param obj object from null model
+#' @param Z covariates for testing (e.g., genotype)
+#' @param w.sqrt square root of weight vector
+#' 
+#' @export
+srat.test <- function(obj, Z, w.sqrt = NULL) { 
+  if (is.null(w.sqrt)) w.sqrt <- rep(1.0, NCOL(Z))  
+  n <- NROW(Z)
+  B <- NCOL(obj$v.ptb)
+  score <- c(w.sqrt * t(Z) %*% obj$e) / n 
+  score.ptb <- w.sqrt * t(Z) %*% (obj$v.ptb * obj$e.ptb) / n  
+  SIGMA <- stats::cov(t(score.ptb - matrix(score, length(score), B)))
+  lambda <- pmax(eigen(SIGMA, symmetric = TRUE, only.values = TRUE)$values, 0)
+  kuonen(q = c(t(score) %*% score), lambda)$pval  
+}
+  
 #' Objective function minimization
 #' 
 #' @param coef initial parameter values
