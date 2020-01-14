@@ -97,12 +97,12 @@ srat.null <- function(y, X, B = 1000) {
 
 #' SRAT with adjustment for additional covariates (testing)
 #' 
-#' @param obj object from null model
 #' @param Z covariates for testing (e.g., genotype)
+#' @param obj object from null model
 #' @param w.sqrt square root of weight vector
 #' 
 #' @export
-srat.test <- function(obj, Z, w.sqrt = NULL) { 
+srat.test <- function(Z, obj, w.sqrt = NULL) { 
   if (is.null(w.sqrt)) w.sqrt <- rep(1.0, NCOL(Z))  
   n <- NROW(Z)
   B <- NCOL(obj$v.ptb)

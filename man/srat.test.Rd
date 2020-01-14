@@ -4,12 +4,12 @@
 \alias{srat.test}
 \title{SRAT with adjustment for additional covariates (testing)}
 \usage{
-srat.test(obj, Z, w.sqrt = NULL)
+srat.test(Z, obj, w.sqrt = NULL)
 }
 \arguments{
-\item{obj}{object from null model}
-
 \item{Z}{covariates for testing (e.g., genotype)}
+
+\item{obj}{object from null model}
 
 \item{w.sqrt}{square root of weight vector}
 }
