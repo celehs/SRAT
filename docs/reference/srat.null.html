@@ -79,6 +79,9 @@
   <a href="../index.html">Home</a>
 </li>
 <li>
+  <a href="../articles/demo.html">Demo</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -114,13 +117,13 @@
     <p>SRAT with adjustment for additional covariates (null model)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>srat.null</span>(<span class='no'>Y</span>, <span class='no'>X</span>, <span class='kw'>cluster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>init</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n.ptb</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
+    <pre class="usage"><span class='fu'>srat.null</span>(<span class='no'>y</span>, <span class='no'>X</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>Y</th>
+      <th>y</th>
       <td><p>outcome vector (e.g., phenotype)</p></td>
     </tr>
     <tr>
@@ -128,15 +131,7 @@
       <td><p>covariates for adjustment (e.g., age, gender)</p></td>
     </tr>
     <tr>
-      <th>cluster</th>
-      <td><p>family identifier</p></td>
-    </tr>
-    <tr>
-      <th>init</th>
-      <td><p>initial parameters</p></td>
-    </tr>
-    <tr>
-      <th>n.ptb</th>
+      <th>B</th>
       <td><p>number of perturbations</p></td>
     </tr>
     </table>

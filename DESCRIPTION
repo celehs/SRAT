@@ -2,7 +2,7 @@ Package: SRAT
 Title: Sequence Robust Association Test
 Version: 0.2.0
 Authors@R: c(
-    person("Ming", "Yang", role = c("aut", "cre"), email = "mingyang@biostatstudio.com"),
+    person("Ming", "Yang", role = c("aut", "cre"), email = "hustyangming@gmail.com"),
     person("Wei", "Dai", role = "aut"),
     person("Tianxi", "Cai", role = "aut")
     )
@@ -11,12 +11,9 @@ URL: https://github.com/celehs/SRAT
 BugReports: https://github.com/celehs/SRAT/issues
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.1.1
-Depends: 
-    np
-Imports:
-    Rcpp,
-    RcppArmadillo
-LinkingTo: 
-    Rcpp, 
-    RcppArmadillo    
+RoxygenNote: 7.0.2
+Suggests: knitr, SKAT
+VignetteBuilder: knitr 
+Depends: np
+Imports: Rcpp, RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo    

@@ -4,8 +4,17 @@
 \alias{obj.min}
 \title{Objective function minimization}
 \usage{
-obj.min(coef, Z, y, u = NULL, v = NULL, tree = TRUE, nrep = 1,
-  ftol = 1e-06, nfun_max = 5000)
+obj.min(
+  coef,
+  Z,
+  y,
+  u = NULL,
+  v = NULL,
+  tree = TRUE,
+  nrep = 1,
+  ftol = 1e-06,
+  nfun_max = 5000
+)
 }
 \arguments{
 \item{coef}{initial parameter values}

@@ -1,0 +1,29 @@
+---
+title: "Main Steps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SRAT-demo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(SRAT)
+library(SKAT)
+```
+
+```{r}
+data(SKAT.example)
+attach(SKAT.example)
+```
+
+```{r}
+obj.skat <- SKAT_Null_Model(y.c ~ X, out_type = "C")
+SKAT(Z, obj.skat, weights.beta = c(1, 1))$p.value
+```
+
+```{r}
+set.seed(123)
+obj.srat <- srat.null(y.c, X)
+srat.test(Z, obj.srat)
+```

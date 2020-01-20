@@ -4,8 +4,17 @@
 \alias{srat}
 \title{SRAT with adjustment for additional covariates}
 \usage{
-srat(Y, Z, X, cluster = NULL, init = NULL, w_sqrt = NULL,
-  bw = NULL, bw_adj = NULL, n_ptb = 1000)
+srat(
+  Y,
+  Z,
+  X,
+  cluster = NULL,
+  init = NULL,
+  w_sqrt = NULL,
+  bw = NULL,
+  bw_adj = NULL,
+  n_ptb = 1000
+)
 }
 \arguments{
 \item{Y}{outcome vector (e.g., phenotype)}
