@@ -197,7 +197,7 @@ arma::mat obj_min(const arma::rowvec & coef, const arma::mat & Z, const arma::ve
         ytry = obj_try(M, idx, ndim, p, 0.5, Z, y, u, v, tree);
         if(ytry >= ytmp) {
           for(i = 0; i < ndim + 1; i++) {
-            if(i != idx(0)) {
+            if((unsigned)i != idx(0)) {
               M(span(i), span(1, ndim)) = rowvec_norm(0.5 * M(span(i), span(1, ndim)) +
                 0.5 * M(span(idx(0)), span(1, ndim)), p);
               M(i, 0) = obj_fun(M(span(i), span(1, ndim)), Z, y, u, v, tree);
@@ -299,7 +299,7 @@ Rcpp::List hybrid(double q, const arma::vec & lambda, double tol, int maxit) {
   x0 = (a + b) / 2.0;
   for (i = 0; i < maxit; i++) {
     x1 = x0 - f0(x0, lambda, q) / f1(x0, lambda);
-    if (x1 > a & x1 < b) {
+    if ((x1 > a) & (x1 < b)) {
       err = fabs(x1 - x0) / (fabs(x1) + tol);
       if (err < tol) break;
       x0 = x1;

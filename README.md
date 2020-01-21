@@ -2,7 +2,7 @@ __Sequence Robust Association Test (SRAT)__
 
 ## Overview
 
-SRAT (Dai et al. 2017) is a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution. 
+Implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution. 
 
 ## Installation
 

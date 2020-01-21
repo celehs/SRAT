@@ -1,12 +1,9 @@
 Package: SRAT
-Title: Sequence Robust Association Test
 Version: 0.2.0
-Authors@R: c(
-    person("Ming", "Yang", role = c("aut", "cre"), email = "hustyangming@gmail.com"),
-    person("Wei", "Dai", role = "aut"),
-    person("Tianxi", "Cai", role = "aut")
-    )
-Description: Sequence Robust Association Test (SRAT). 
+Title: Sequence Robust Association Test
+Author: Ming Yang, Wei Dai, Tianxi Cai
+Maintainer: Ming Yang <hustyangming@gmail.com>
+Description: Implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution. 
 URL: https://github.com/celehs/SRAT
 BugReports: https://github.com/celehs/SRAT/issues
 License: GPL-3
@@ -17,3 +14,5 @@ VignetteBuilder: knitr
 Depends: np
 Imports: Rcpp, RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo    
+NeedsCompilation: yes
+
