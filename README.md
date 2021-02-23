@@ -1,6 +1,8 @@
 
 # SRAT: Sequence Robust Association Test
 
+[![CRAN](https://www.r-pkg.org/badges/version/SRAT)](https://CRAN.R-project.org/package=SRAT)
+
 ## Overview
 
 Implements a fully rank-based and flexible approach to test for
@@ -13,16 +15,10 @@ distribution.
 
 ## Installation
 
-If `remotes` is not installed, uncomment the code below and install it
-from CRAN.
-
-``` r
-install.packages("remotes")
-```
-
 Install development version from GitHub:
 
 ``` r
+# install.packages("remotes")
 remotes::install_github("celehs/SRAT")
 ```
 
