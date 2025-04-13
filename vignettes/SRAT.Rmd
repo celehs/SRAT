@@ -1,8 +1,9 @@
 ---
-title: "SRAT"
+title: "Sequence Robust Association Test (SRAT)"
+subtitle: "A Rank-Based Method for Testing Genetic Associations with Familial Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SRAT}
+  %\VignetteIndexEntry{Sequence Robust Association Test (SRAT)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,23 +16,120 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction
+
+The Sequence Robust Association Test (SRAT) is a fully rank-based, flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT was developed specifically for genetic association studies that involve family data, such as genome-wide association studies (GWAS) and next-generation sequencing studies (NGSS).
+
+### Key Features and Advantages
+
+SRAT offers several advantages over traditional methods:
+
+1. **Robustness**: As a fully rank-based method, SRAT is robust to outliers and non-normality in the outcome distribution.
+
+2. **Flexibility in correlation structure**: SRAT allows for unknown correlation structures within families.
+
+3. **Improved type I error control**: SRAT provides better protection against type I error rate inflation compared to existing methods.
+
+4. **Enhanced power**: For settings with skewed outcome distributions, SRAT can be more powerful than parametric approaches.
+
+5. **Special case**: SRAT includes the well-known Wilcoxon rank sum test as a special case.
+
+## Basic Usage
+
+### Setup
+
+First, load the required packages:
+
 ```{r setup}
 library(SRAT)
-library(SKAT)
+library(SKAT)  # For comparison and example data
 ```
+
+### Example Data
+
+For demonstration, we'll use the example data from the SKAT package, which contains:
+- `Z`: A genotype matrix containing genetic variants
+- `X`: A covariate matrix (e.g., age, gender)
+- `y.c`: A continuous phenotype variable
 
 ```{r}
 data(SKAT.example)
 attach(SKAT.example)
 ```
 
-```{r}
-obj.skat <- SKAT_Null_Model(y.c ~ X, out_type = "C")
-SKAT(Z, obj.skat, weights.beta = c(1, 1))$p.value
-```
+### Comparing SKAT and SRAT
+
+Let's first run the analysis using SKAT for comparison:
 
 ```{r}
-set.seed(123)
-obj.srat <- srat.null(y.c, X)
-srat.test(Z, obj.srat)
+# Run SKAT analysis
+obj.skat <- SKAT_Null_Model(y.c ~ X, out_type = "C")
+skat_pval <- SKAT(Z, obj.skat, weights.beta = c(1, 1))$p.value
+print(paste("SKAT p-value:", skat_pval))
 ```
+
+Now, let's run the same analysis using SRAT:
+
+```{r}
+# Run SRAT analysis
+set.seed(123)  # For reproducibility
+obj.srat <- srat.null(y.c, X)  # Fit null model
+srat_pval <- srat.test(Z, obj.srat)  # Test for association
+print(paste("SRAT p-value:", srat_pval))
+```
+
+## SRAT Workflow Explained
+
+SRAT operates in a two-step process:
+
+1. **Null model fitting** (`srat.null()`): This function fits a null model that accounts for the covariates while ignoring the genetic variants. It returns an object containing elements needed for the subsequent testing.
+
+2. **Association testing** (`srat.test()`): This function tests for the association between the genetic variants and the outcome, conditional on the null model.
+
+### Parameters and Options
+
+#### srat.null()
+- `y`: Outcome vector (e.g., phenotype)
+- `X`: Covariates for adjustment (e.g., age, gender)
+- `B`: Number of perturbations (default: 1000)
+
+#### srat.test()
+- `Z`: Covariates for testing (e.g., genotype)
+- `obj`: Object from null model
+- `w.sqrt`: Square root of weight vector (default: all 1's)
+
+## Advanced Example: Using Weights
+
+SRAT allows for weighting of genetic variants, which can improve power when certain variants are more likely to be causal:
+
+```{r}
+# Create weights (example: upweight rare variants)
+weights <- rep(1, ncol(Z))
+maf <- colMeans(Z)/2
+rare_variants <- which(maf < 0.05)
+weights[rare_variants] <- 2
+
+# Apply weights in SRAT
+obj.srat <- srat.null(y.c, X)
+weighted_result <- srat.test(Z, obj.srat, w.sqrt = sqrt(weights))
+print(paste("SRAT p-value with weights:", weighted_result))
+```
+
+## Understanding the Output
+
+The p-value returned by SRAT indicates the statistical significance of the association between the set of genetic variants and the phenotype. A smaller p-value suggests stronger evidence against the null hypothesis of no association.
+
+## Comparison with Other Methods
+
+SRAT has been shown to be particularly advantageous when:
+- The outcome distribution is skewed or contains outliers
+- Family correlation structures are complex
+- The sample size is relatively small
+
+## Conclusion
+
+SRAT provides a robust alternative to existing methods for testing genetic associations in family-based studies. Its rank-based nature and ability to handle family correlation make it suitable for a wide range of genetic studies.
+
+## References
+
+Dai W, Yang M, Wang C, Cai T. Sequence robust association test for familial data. Biometrics. 2017 Sep;73(3):876-884. doi: 10.1111/biom.12643.
