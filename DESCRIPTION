@@ -1,22 +1,20 @@
 Package: SRAT
-Version: 0.3.0
+Version: 0.3.0.9000
 Title: Sequence Robust Association Test
 Authors@R: c(
-    person("Ming", "Yang", role = "aut"),
+    person("Ming", "Yang", email = "hustyangming@gmail.com", role = c("aut", "cre")),
     person("Wei", "Dai", role = "aut"),
-    person("Tianxi", "Cai", role = "aut"),
-    person(family = "PARSE LTD", role =  c("aut", "cre"), email = "software@parse-health.org")
-    )
-Description: Implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution. 
-URL: https://celehs.github.io/SRAT/
-BugReports: https://github.com/celehs/SRAT/issues
-License: GPL-3
-Encoding: UTF-8
-RoxygenNote: 7.1.1
-Suggests: knitr, SKAT
-VignetteBuilder: knitr 
+    person("CELEHS", "Lab", role = "aut"),
+    person("PARSE", "Health", role =  "aut"))
+Description: Implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution.
 Depends: np
 Imports: Rcpp, RcppArmadillo
-LinkingTo: Rcpp, RcppArmadillo    
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: knitr, rmarkdown, SKAT
+VignetteBuilder: knitr
 NeedsCompilation: yes
-
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+URL: https://celehs.github.io/SRAT/
+BugReports: https://github.com/celehs/SRAT/issues

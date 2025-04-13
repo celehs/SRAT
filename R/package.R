@@ -6,7 +6,6 @@
 #' existing methods, SRAT has the advantages of allowing for unknown correlation structures 
 #' and weaker assumptions about the outcome distribution. 
 #' 
-#' @docType package
 #' @name SRAT-package
 #' @aliases SRAT
 #' @keywords package

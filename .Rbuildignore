@@ -4,3 +4,6 @@ LICENSE
 docs/
 pkgdown/
 _vignettes/
+^SRAT\.Rcheck$
+^SRAT.*\.tar\.gz$
+^SRAT.*\.tgz$

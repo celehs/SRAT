@@ -1,7 +1,4 @@
-
 # SRAT: Sequence Robust Association Test
-
-[![CRAN](https://www.r-pkg.org/badges/version/SRAT)](https://CRAN.R-project.org/package=SRAT)
 
 ## Overview
 
