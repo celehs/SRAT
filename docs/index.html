@@ -71,7 +71,20 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. SRAT includes the well-known Wilcoxon rank sum test as a special case. Comparing to existing methods, SRAT has the advantages of allowing for unknown correlation structures and weaker assumptions about the outcome distribution.</p>
+<p>SRAT implements a fully rank-based and flexible approach to test for association between a set of genetic variants and an outcome, while accounting for within-family correlation and adjusting for covariates. The method is designed for genome-wide association studies (GWAS) and next-generation sequencing studies (NGSS) performed on family data.</p>
+<div class="section level3">
+<h3 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h3>
+<ul>
+<li>Fully rank-based, robust statistical method</li>
+<li>Accounts for within-family correlation in genetic studies</li>
+<li>Allows for unknown correlation structures</li>
+<li>Requires weaker assumptions about the outcome distribution</li>
+<li>Includes the well-known Wilcoxon rank sum test as a special case</li>
+<li>Provides better protection against type I error rate inflation</li>
+<li>More powerful for settings with skewed outcome distributions compared to existing methods</li>
+</ul>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -82,9 +95,23 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"celehs/SRAT"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
 </h2>
-<p>W Dai, M Yang, C Wang, T Cai. Sequence robust association test for familial data. <em>Biometrics</em>, 2017, 73(3):876–884. <a href="https://doi.org/10.1111/biom.12643" class="external-link uri">https://doi.org/10.1111/biom.12643</a></p>
+<ul>
+<li>
+<code><a href="reference/srat.html">srat()</a></code>: Main function for the Sequence Robust Association Test</li>
+<li>
+<code><a href="reference/srat.null.html">srat.null()</a></code>: Fits the null model for SRAT</li>
+<li>
+<code><a href="reference/srat.test.html">srat.test()</a></code>: Tests for genetic association using the fitted null model</li>
+<li>
+<code><a href="reference/obj.min.html">obj.min()</a></code>: Helper function for objective function minimization</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Dai W, Yang M, Wang C, Cai T. Sequence robust association test for familial data. Biometrics. 2017 Sep;73(3):876-884. doi: 10.1111/biom.12643. Epub 2017 Mar 8. PMID: 28273695; PMCID: PMC11141465.</p>
 </div>
 </div>
   </div>
